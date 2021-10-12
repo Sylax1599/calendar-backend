@@ -32,7 +32,7 @@ router.post('/',
 [
         //Middlewares
         check('email', 'Ingrese una direccion email correcta').isEmail(),
-        check('password', 'El password debe tener mas de 6 caracteres').isLength({min: 6}),
+        check('password', 'La contraseña debe tener mas de 6 caracteres').isLength({min: 6}),
         validarCampos
 
 ],

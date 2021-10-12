@@ -9,7 +9,7 @@ const router= Router();
 const {validarJWT}= require('../middlewares/validar-jwt');
 const {check}= require('express-validator');
 const { validarCampos } = require('../middlewares/validar-campos');
-
+const {isDate}= require('../helpers/isDate');
 
 //Se puede hacer la parte del middleware del JWT así también
 //router.use(validarJWT);
@@ -30,8 +30,8 @@ router.get('/',validarJWT , getEventos );
 router.post('/', [
     //Middlewares
     check('title', 'El titulo es obligatorio').not().isEmpty(),
-    check('start', 'Fecha inicio es required').isDate(),
-    check('end','Fecha de finalización es obligatoria').isDate(),
+    check('start', 'Fecha inicio es required').custom(isDate),
+    check('end','Fecha de finalización es obligatoria').custom(isDate),
     validarCampos,
     validarJWT 
 ], crearEvento);
@@ -41,8 +41,8 @@ router.post('/', [
 router.put('/:id', [
     //Middlewares
     check('title', 'El titulo es obligatorio').not().isEmpty(),
-    check('start', 'Fecha inicio es required').isDate(),
-    check('end','Fecha de finalización es obligatoria').isDate(),
+    check('start', 'Fecha inicio es required').custom(isDate),
+    check('end','Fecha de finalización es obligatoria').custom(isDate),
     validarCampos,
     validarJWT 
 ], actualizarEvento);
